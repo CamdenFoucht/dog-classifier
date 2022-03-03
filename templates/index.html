@@ -1,0 +1,127 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Classifier</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="static/js/index.js" type="text/javascript" defer></script>\
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function (e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
+    </script>
+</head>
+
+<body>
+    <main>
+
+        <div class="container">
+
+            <h1 class="title">Dog Classifier</h1>
+            <p class="title-text">
+                Provide an image to the classifier by either uploading your own image, or giving a link to a publicly
+                hosted image like google.com.
+                Our Neural Net will try to predict the dog breed from the image supplied. The neural net is pretrained
+                on Google's Neural Net and was trained
+                on Stanfords dog breed dataset. It has an accuracy of 85%.
+            </p>
+
+            <div class="flex-row">
+                <div class="upload-container">
+                    <div class="upload-option-container">
+                        <p>Provide a Link</p>
+
+                        <form action="{{ url_for('predict')}}" method="post">
+                            <input class="input" type="text" name="url" placeholder="google.images/golden-retriever.png"
+                                required>
+                            <button class="browse-btn" type="submit">Search</button>
+                        </form>
+                    </div>
+
+                    <div class="upload-option-container">
+                        <p>Provide an Image</p>
+                        <div class="img-drop-container">
+                            <form class="upload-form" method="post" action="/img-upload" enctype="multipart/form-data">
+                                <input onchange="this.form.submit()" hidden type="file" name="file" id="file-upload">
+                                <img class="img-upload-icon"
+                                    src="https://png.pngtree.com/png-vector/20191129/ourlarge/pngtree-image-upload-icon-photo-upload-icon-png-image_2047547.jpg" />
+                                <input class="browse-btn" type="button" value="Browse..."
+                                    onclick="document.getElementById('file-upload').click();" />
+
+                            </form>
+                            <!-- <p class="supports">Supports png and jpg images</p> -->
+
+                            <!-- <p class="or">Or</p> -->
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="process-container">
+                    <div>
+                        <h2 class="prediction-result">Prediction Image</h2>
+
+
+                        {% if filename %}
+                        <img class="user-img-preview" src="{{ url_for('display_image', filename=filename) }}">
+                        <img class="user-img-preview"  style="filter: brightness(50%)"
+                            src="{{ url_for('display_image', filename=filename) }}">
+                        <img class="user-img-preview" style="filter: brightness(25%)" src="{{ url_for('display_image', filename=filename) }}">
+                        <img class="user-img-preview" style="filter: brightness(10%)" src="{{ url_for('display_image', filename=filename) }}">
+                        {% elif image_url %}
+                        <img class="user-img-preview" src="{{image_url}}">
+                        <img class="user-img-preview" style="filter: brightness(50%)" src="{{image_url}}">
+                        <img class="user-img-preview" style="filter: brightness(25%)" src="{{image_url}}">
+                        <img class="user-img-preview" style="filter: brightness(10%)" src="{{image_url}}">
+                        {% else %}
+                        <div class="user-img-placeholder"></div>
+                        {% endif %}
+
+                    </div>
+
+
+                </div>
+
+                <!-- <button class="predict-btn">Predict</button> -->
+
+
+            </div>
+
+
+            <div class="break"></div>
+
+            {% if prediction_text %}
+                <h2 class="prediction-result">Prediction Result: {{prediction_text}}</h2>
+            {% endif %}
+
+
+            {% if image_url %}
+                <div class="user-img-wrapper"><img class="user-img" src="{{image_url}}" /></div>
+            {% elif filename %}
+                <div class="user-img-wrapper"><img class="user-img" src="{{ url_for('display_image', filename=filename) }}"></div>
+            {% endif %}
+
+
+
+
+
+        </div>
+
+
+    </main>
+
+
+</body>
+
+</html>
