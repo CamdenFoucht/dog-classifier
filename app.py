@@ -46,6 +46,8 @@ class CustomUnpickler(pickle.Unpickler):
         if name == 'DogBreedPretrainedGoogleNet':
             from model import DogBreedPretrainedGoogleNet
             return DogBreedPretrainedGoogleNet
+        elif module == 'torch.storage' and name == '_load_from_bytes':
+            return lambda b: torch.load(BytesIO(b), map_location='cpu')
         return super().find_class(module, name)
 
 model = CustomUnpickler(open('model.pkl', 'rb')).load().cpu()
