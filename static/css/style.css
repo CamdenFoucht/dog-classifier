@@ -145,8 +145,7 @@ body {
 }
 
 .user-img-preview {
-    height: 200px;
-    width: 200px;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -176,4 +175,10 @@ body {
     justify-content: center;
     padding: 1rem;
     background: #f1f6fb;
+}
+
+.img-process-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 1.5rem;
 }

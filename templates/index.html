@@ -72,22 +72,24 @@
                     <div>
                         <h2 class="prediction-result">Prediction Image</h2>
 
-
-                        {% if filename %}
-                        <img class="user-img-preview" src="{{ url_for('display_image', filename=filename) }}">
-                        <img class="user-img-preview"  style="filter: brightness(50%)"
-                            src="{{ url_for('display_image', filename=filename) }}">
-                        <img class="user-img-preview" style="filter: brightness(25%)" src="{{ url_for('display_image', filename=filename) }}">
-                        <img class="user-img-preview" style="filter: brightness(10%)" src="{{ url_for('display_image', filename=filename) }}">
-                        {% elif image_url %}
-                        <img class="user-img-preview" src="{{image_url}}">
-                        <img class="user-img-preview" style="filter: brightness(50%)" src="{{image_url}}">
-                        <img class="user-img-preview" style="filter: brightness(25%)" src="{{image_url}}">
-                        <img class="user-img-preview" style="filter: brightness(10%)" src="{{image_url}}">
-                        {% else %}
-                        <div class="user-img-placeholder"></div>
-                        {% endif %}
-
+                        <div class="img-process-row">
+                            {% if filename %}
+                            <img class="user-img-preview" src="{{ url_for('display_image', filename=filename) }}">
+                            <img class="user-img-preview" style="filter: contrast(200%)"
+                                src="{{ url_for('display_image', filename=filename) }}">
+                            <img class="user-img-preview" style="filter: hue-rotate(90deg)"
+                                src="{{ url_for('display_image', filename=filename) }}">
+                            <img class="user-img-preview" style="filter: grayscale(100%)"
+                                src="{{ url_for('display_image', filename=filename) }}">
+                            {% elif image_url %}
+                            <img class="user-img-preview" src="{{image_url}}">
+                            <img class="user-img-preview" style="filter: contrast(200%)" src="{{image_url}}">
+                            <img class="user-img-preview" style="filter: hue-rotate(90deg)" src="{{image_url}}">
+                            <img class="user-img-preview" style="filter: grayscale(100%)" src="{{image_url}}">
+                            {% else %}
+                            <div class="user-img-placeholder"></div>
+                            {% endif %}
+                        </div>
                     </div>
 
 
@@ -102,14 +104,15 @@
             <div class="break"></div>
 
             {% if prediction_text %}
-                <h2 class="prediction-result">Prediction Result: {{prediction_text}}</h2>
+            <h2 class="prediction-result">Prediction Result: {{prediction_text}}</h2>
             {% endif %}
 
 
             {% if image_url %}
-                <div class="user-img-wrapper"><img class="user-img" src="{{image_url}}" /></div>
+            <div class="user-img-wrapper"><img class="user-img" src="{{image_url}}" /></div>
             {% elif filename %}
-                <div class="user-img-wrapper"><img class="user-img" src="{{ url_for('display_image', filename=filename) }}"></div>
+            <div class="user-img-wrapper"><img class="user-img" src="{{ url_for('display_image', filename=filename) }}">
+            </div>
             {% endif %}
 
 
