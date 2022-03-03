@@ -115,7 +115,7 @@ def predict():
 
 
 @app.route('/')
-def hello():
+def app():
     return render_template('index.html')
 
 
