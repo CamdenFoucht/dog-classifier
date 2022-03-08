@@ -1,5 +1,4 @@
 * {
-    font-family: 'Fredoka', sans-serif;
     box-sizing: border-box;
 
 }
@@ -7,14 +6,17 @@
 body {
     background: #f1f6fb;
     padding: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+}
 
 .container {
     max-width: 1000px;
     margin: auto;
+    margin-top: 3rem;
     padding: 2rem;
     background: #fff;
     border-radius: 6px;
@@ -22,14 +24,15 @@ body {
 
 .title {
     margin-top: 0;
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 900;
-    color: #222;
+    color: #333;
 }
 
 .title-text {
     margin: 1rem 0 2rem 0;
     line-height: 2;
+    color: rgb(102, 102, 102);
 }
 
 .input {
