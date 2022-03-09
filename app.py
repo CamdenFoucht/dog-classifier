@@ -125,4 +125,5 @@ def display_image(filename):
     return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
-app.run()
+if __name__ == '__main__':
+    app.run(debug=True)

@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dog Classifier</title>
+    <title>Dog Breed Classifier</title>
     <link rel="stylesheet" href="static/css/style.css">
-    <script src="static/js/index.js" type="text/javascript" defer></script>\
+    <script src="static/js/index.js" type="text/javascript" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
     <script>
         document.addEventListener("DOMContentLoaded", function (event) {
             var scrollpos = localStorage.getItem('scrollpos');
@@ -27,7 +29,7 @@
 
         <div class="container">
 
-            <h1 class="title">Dog Classifier</h1>
+            <h1 class="title">Dog Breed Classifier</h1>
             <p class="title-text">
                 Provide an image to the classifier by either uploading your own image, or giving a link to a publicly
                 hosted image like google.com.
@@ -70,27 +72,30 @@
 
                 <div class="process-container">
                     <div>
-                        <h2 class="prediction-result">Prediction Image</h2>
-
 
                         {% if filename %}
-                        <img class="user-img-preview" src="{{ url_for('display_image', filename=filename) }}">
-                        <img class="user-img-preview"  style="filter: brightness(50%)"
-                            src="{{ url_for('display_image', filename=filename) }}">
-                        <img class="user-img-preview" style="filter: brightness(25%)" src="{{ url_for('display_image', filename=filename) }}">
-                        <img class="user-img-preview" style="filter: brightness(10%)" src="{{ url_for('display_image', filename=filename) }}">
+                        <h2 class="prediction-result">Prediction Image</h2>
+
+                        <div class="img-process-row">
+                            <img class="user-img-preview" src="{{ url_for('display_image', filename=filename) }}">
+                            <img class="user-img-preview" style="filter: contrast(200%)"
+                                src="{{ url_for('display_image', filename=filename) }}">
+                            <img class="user-img-preview" style="filter: hue-rotate(90deg)"
+                                src="{{ url_for('display_image', filename=filename) }}">
+                            <img class="user-img-preview" style="filter: grayscale(100%)"
+                                src="{{ url_for('display_image', filename=filename) }}">
+                        </div>
                         {% elif image_url %}
-                        <img class="user-img-preview" src="{{image_url}}">
-                        <img class="user-img-preview" style="filter: brightness(50%)" src="{{image_url}}">
-                        <img class="user-img-preview" style="filter: brightness(25%)" src="{{image_url}}">
-                        <img class="user-img-preview" style="filter: brightness(10%)" src="{{image_url}}">
-                        {% else %}
-                        <div class="user-img-placeholder"></div>
+                        <h2 class="prediction-result">Prediction Image</h2>
+
+                        <div class="img-process-row">
+                            <img class="user-img-preview" src="{{image_url}}">
+                            <img class="user-img-preview" style="filter: contrast(200%)" src="{{image_url}}">
+                            <img class="user-img-preview" style="filter: hue-rotate(90deg)" src="{{image_url}}">
+                            <img class="user-img-preview" style="filter: grayscale(100%)" src="{{image_url}}">
+                        </div>
                         {% endif %}
-
                     </div>
-
-
                 </div>
 
                 <!-- <button class="predict-btn">Predict</button> -->
@@ -99,28 +104,22 @@
             </div>
 
 
-            <div class="break"></div>
 
             {% if prediction_text %}
-                <h2 class="prediction-result">Prediction Result: {{prediction_text}}</h2>
+            <div class="break"></div>
+            <h2 class="prediction-result">Prediction Result: {{prediction_text}}</h2>
             {% endif %}
 
 
             {% if image_url %}
-                <div class="user-img-wrapper"><img class="user-img" src="{{image_url}}" /></div>
+            <div class="user-img-wrapper"><img class="user-img" src="{{image_url}}" /></div>
             {% elif filename %}
-                <div class="user-img-wrapper"><img class="user-img" src="{{ url_for('display_image', filename=filename) }}"></div>
+            <div class="user-img-wrapper"><img class="user-img" src="{{ url_for('display_image', filename=filename) }}">
+            </div>
             {% endif %}
 
-
-
-
-
         </div>
-
-
     </main>
-
 
 </body>
 
